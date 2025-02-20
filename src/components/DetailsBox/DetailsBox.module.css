@@ -1,0 +1,22 @@
+.container {
+    /* border: 1px solid red; */
+    display: flex;   
+    justify-content: space-between;
+    gap: 10px; 
+    padding: 5px;
+}
+
+.detailsCard {
+    background-color: #301b588c;
+    color: white; 
+    width: 40%; 
+    height: 6rem;
+    padding: 10px;  /* ✅ Corrected */
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+}

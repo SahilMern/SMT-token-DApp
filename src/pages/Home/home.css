@@ -1,0 +1,64 @@
+.container {
+    padding: 16px;
+    /* background-color: #f3f4f6; */
+    border-radius: 8px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .wallet-info {
+    margin-top: 12px;
+  }
+  
+  .wallet-info p {
+    margin: 6px 0;
+  }
+  
+  .button {
+    margin-top: 12px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .connect-button {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .logout-button {
+    background-color: #dc2626;
+    color: white;
+  }
+  
+  /* Table Styling */
+  .table-container {
+    width: 100%;
+    margin-top: 16px;
+    border-collapse: collapse;
+  }
+  
+  .table-container th, 
+  .table-container td {
+    border: 1px solid #9ca3af;
+    padding: 8px;
+    text-align: center;
+  }
+/*   
+  .table-container th {
+    background-color: #d1d5db;
+  }
+  
+  .table-container tr:nth-child(even) {
+    background-color: #f9fafb;
+  } */
+  

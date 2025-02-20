@@ -1,0 +1,93 @@
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+    border-radius: 0.5rem;
+  background-color: #252f565a;
+  color: white;
+}
+
+.logo h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+/* Navbar Links */
+.menu ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu ul li {
+  margin-left: 2rem;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.menu ul li a:hover {
+  color: #f39c12; /* Yellow on Hover */
+}
+
+/* Connect Wallet Button */
+.walletButton {
+  background-color: #127cf5;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.walletButton:hover {
+  background-color: #0142b3;
+}
+
+/* Mobile Menu Icon */
+.menuIcon {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+
+  .menu.active {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #181f3c;
+    padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .menu ul {
+    flex-direction: column;
+  }
+
+  .menu ul li {
+    margin: 1rem 0;
+  }
+
+  .menuIcon {
+    display: block;
+  }
+}

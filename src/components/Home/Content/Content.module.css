@@ -1,0 +1,27 @@
+.content {
+  margin-top: 2rem;
+  min-height: 60vh;
+    /* margin-left: 220px; */
+    /* padding: 20px; */
+    /* min-height: 100vh; */
+    /* border: 1px solid red; */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f9f9f90b;
+  }
