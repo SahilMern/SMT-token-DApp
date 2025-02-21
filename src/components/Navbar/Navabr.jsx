@@ -7,50 +7,48 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { account, network, metaMaskConnection, logout } =
     useContext(ConnectWalletContex);
-  // console.log(account, "account");
+
+  // Function to shorten the wallet address
+  const shortAddress = (address) =>
+    address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "";
 
   return (
     <nav className={styles.navbar}>
+      {/* Logo */}
       <div className={styles.logo}>
         <h3>MyDeod</h3>
       </div>
+
+      {/* Wallet Info - Center Aligned */}
+      <div className={styles.walletInfo}>
+        {account ? (
+          <>
+            <p>
+              <strong>Wallet:</strong> {shortAddress(account)}
+            </p>
+            <p>
+              <strong>Network:</strong>{" "}
+              {network === 97 ? "BSC Testnet" : "Other"}
+            </p>
+          </>
+        ) : (
+          <button className={styles.walletButton} onClick={metaMaskConnection}>
+            Connect Wallet
+          </button>
+        )}
+      </div>
+
+      {/* Disconnect Button */}
+      {account && (
+        <button className={styles.disconnectButton} onClick={logout}>
+          Disconnect
+        </button>
+      )}
 
       {/* Mobile Menu Icon */}
       <div className={styles.menuIcon} onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FaTimes /> : <FaBars />}
       </div>
-
-      {/* Navbar Links */}
-      {/* <div className={`${styles.menu} ${menuOpen ? styles.active : ""}`}>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact Us</a></li>
-          <li><a href="/services">Services</a></li>
-        </ul>
-      </div> */}
-
-      {account ? (
-        <div className="wallet-info">
-          <p>
-            <strong>Wallet:</strong> {account}
-          </p>
-          <p>
-            <strong>Network:</strong> {network === 97 ? "BSC Testnet" : "Other"}
-          </p>
-          {/* <p><strong>BNB Balance:</strong> {balance ? `${balance} BNB` : "Loading..."}</p> */}
-          <button className="button logout-button" onClick={logout}>
-            Logout
-          </button>
-        </div>
-      ) : (
-        // <button className="button connect-button" onClick={metaMaskConnection}>Connect Wallet</button>
-        <button className={styles.walletButton} onClick={metaMaskConnection}>
-          Connect Wallet
-        </button>
-      )}
-      {/* Connect Wallet Button */}
-      {/* <button className={styles.walletButton} onClick={metaMaskConnection}>Connect Wallet</button> */}
     </nav>
   );
 };
