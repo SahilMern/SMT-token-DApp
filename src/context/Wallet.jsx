@@ -1,12 +1,12 @@
-import { createContext, useEffect } from "react";
+import { createContext } from "react";
 
+export const WalletContext = createContext();
 
-export const WalletContext = createContext(); // ✅ Exporting WalletContext
 const Wallet = ({ children }) => {
   const username = "mayuresh";
 
   return (
-    <WalletContext.Provider value={username}>
+    <WalletContext.Provider value={{ username }}>
       {children}
     </WalletContext.Provider>
   );

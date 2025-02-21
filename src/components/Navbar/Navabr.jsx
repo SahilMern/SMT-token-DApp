@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
-import styles from "./Navbar.module.css"; 
+import styles from "./Navbar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa"; // Hamburger Menu Icons
 import { ConnectWalletContex } from "../../context/ConnectWallet";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { account, network, metaMaskConnection, logout } =
+    useContext(ConnectWalletContex);
+  // console.log(account, "account");
 
-  const { account, connectWallet, disconnectWallet } = useContext(ConnectWalletContex);
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
@@ -28,8 +30,27 @@ const Navbar = () => {
         </ul>
       </div> */}
 
+      {account ? (
+        <div className="wallet-info">
+          <p>
+            <strong>Wallet:</strong> {account}
+          </p>
+          <p>
+            <strong>Network:</strong> {network === 97 ? "BSC Testnet" : "Other"}
+          </p>
+          {/* <p><strong>BNB Balance:</strong> {balance ? `${balance} BNB` : "Loading..."}</p> */}
+          <button className="button logout-button" onClick={logout}>
+            Logout
+          </button>
+        </div>
+      ) : (
+        // <button className="button connect-button" onClick={metaMaskConnection}>Connect Wallet</button>
+        <button className={styles.walletButton} onClick={metaMaskConnection}>
+          Connect Wallet
+        </button>
+      )}
       {/* Connect Wallet Button */}
-      <button className={styles.walletButton} onClick={handleClick}>Connect Wallet</button>
+      {/* <button className={styles.walletButton} onClick={metaMaskConnection}>Connect Wallet</button> */}
     </nav>
   );
 };
