@@ -1,11 +1,18 @@
 import { createContext, useState } from "react";
 import { ethers } from "ethers";
+import { contractAddress } from "../helper/ContractAddres";
+import { Abi } from "../helper/Abi";
+import { useNavigate } from "react-router-dom";
 
 export const ConnectWalletContex = createContext();
+
 const ConnectWallet = ({ children }) => {
+  const data = "hanuman ji";
+
   const [account, setAccount] = useState(
     localStorage.getItem("account") || null
   );
+  const navigate = useNavigate();
   const [balance, setBalance] = useState(null);
   const [network, setNetwork] = useState(null);
   const [addressesData, setAddressesData] = useState([]);
@@ -23,39 +30,57 @@ const ConnectWallet = ({ children }) => {
       const userAccount = await signer.getAddress();
       let networkData = await provider.getNetwork();
 
-      setAccount(userAccount);
-      setNetwork(Number(networkData.chainId));
-      localStorage.setItem("account", userAccount);
+      try {
+        const providerForContract = new ethers.JsonRpcProvider(
+          "https://bsc-testnet-dataseed.bnbchain.org"
+        );
+        const contract = new ethers.Contract(
+          contractAddress,
+          Abi,
+          providerForContract
+        );
+        const contractOwner = await contract.owner();
+        console.log(contractOwner, "ContractOwner");
 
-      // getBalance(userAccount);
+        const userValue = "0x07167acA51498BA070858E0a91fcafB26Bc32ce4";
+        if (userValue === contractOwner) {
+          alert("done");
+          setAccount(userAccount);
+
+          localStorage.setItem("account", userAccount);
+          localStorage.setItem("login", "true");
+          navigate("/");
+        } else {
+          alert(`${userAccount} Address Not match with Owner Adress`);
+        }
+      } catch (error) {
+        console.error("Error connecting wallet:", error);
+      }
     } catch (error) {
       console.error("Error connecting wallet:", error);
     }
   };
 
-  const logout = () => {
+  const handleDisconnect = () => {
     setAccount(null);
     setBalance(null);
     setNetwork(null);
     localStorage.removeItem("account");
+    localStorage.removeItem("login");
+    navigate("/walletconnect");
   };
+
   return (
-    <ConnectWalletContex
+    <ConnectWalletContex.Provider
       value={{
         account,
-        balance,
-        network,
-        addressesData,
-        setAccount,
-        setBalance,
-        setNetwork,
-        setAddressesData,
         metaMaskConnection,
-        logout,
+        handleDisconnect,
+        data,
       }}
     >
       {children}
-    </ConnectWalletContex>
+    </ConnectWalletContex.Provider>
   );
 };
 

@@ -1,80 +1,42 @@
-/* Navbar Styling */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  height: 4rem;
   background-color: #252f56;
   color: white;
+  width: 100%;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
 }
 
 /* Logo */
-.logo h3 {
-  margin: 0;
-  font-size: 1.6rem;
+.logo {
+  font-size: 1.2rem;
   font-weight: bold;
+  color: white;
 }
 
-/* Wallet Info - Center Aligned */
 .walletInfo {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
 }
-
-.walletInfo p {
-  margin: 0;
-  font-size: 1rem;
-}
-
-/* Connect Wallet & Disconnect Buttons */
-.walletButton,
 .disconnectButton {
-  background-color: #127cf5;
   border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
+  outline: none;
+  background: linear-gradient(272deg, #ff512f, #dd2476);
+  color: white;
   font-size: 1rem;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
 }
-
-.walletButton:hover {
-  background-color: #0142b3;
-}
-
-.disconnectButton {
-  background-color: #f53d3d;
-}
-
 .disconnectButton:hover {
-  background-color: #c21f1f;
+  background: linear-gradient(272deg, #fa623c, #feb47b);
 }
-
-/* Mobile Menu Icon */
-.menuIcon {
-  display: none;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
     padding: 1.5rem;
-  }
-
-  .walletInfo {
-    text-align: center;
-  }
-
-  .menuIcon {
-    display: block;
   }
 }
