@@ -5,10 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import ContextProvider from "./context/ContextProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
-    <BrowserRouter>
+  <BrowserRouter>
     <ContextProvider>
-
       <App />
     </ContextProvider>
-    </BrowserRouter>
+  </BrowserRouter>
 );

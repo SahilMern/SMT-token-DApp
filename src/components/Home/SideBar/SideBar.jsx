@@ -1,17 +1,19 @@
-import styles from "./Sidebar.module.css"; // CSS module import
+import styles from "./Sidebar.module.css";
+import { NavLink, useLocation } from "react-router-dom";
+
+//ICONS
 import {
   FaExchangeAlt,
   FaShoppingCart,
   FaGift,
   FaUserCircle,
-} from "react-icons/fa"; // Importing icons
+} from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
-import { NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   let location = useLocation();
-  console.log(location.pathname === "/", "loaction");
+  // console.log(location.pathname === "/", "loaction");
 
   return (
     <div className={styles.sidebar}>
@@ -21,23 +23,25 @@ const Sidebar = () => {
           alt="Logo"
           className={styles.logo}
         />
-        {/* {
-          URL.path
-        } */}
         <ul>
-        <NavLink to={"/"} className="Navlink">
-          <li className={location.pathname === "/" ? styles.active : ""}>
-            <MdDashboard className={styles.icon} /> Dashboard
-          </li>
-        </NavLink>
+          <NavLink to={"/"} className="Navlink">
+            <li className={location.pathname === "/" ? styles.active : ""}>
+              <MdDashboard className={styles.icon} /> Dashboard
+            </li>
+          </NavLink>
           <NavLink to={"/about"} className="Navlink">
             <li className={location.pathname === "/about" ? styles.active : ""}>
               <FaUsers className={styles.icon} /> Users
             </li>
           </NavLink>
-          <li>
-            <FaExchangeAlt className={styles.icon} /> Direct Transfer
-          </li>
+
+          <NavLink to={"/setdata"} className="Navlink">
+            <li
+              className={location.pathname === "/setdata" ? styles.active : ""}
+            >
+              <FaExchangeAlt className={styles.icon} />Set Data
+            </li>
+          </NavLink>
           <li>
             <FaShoppingCart className={styles.icon} /> Buy
           </li>

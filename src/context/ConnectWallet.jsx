@@ -51,7 +51,7 @@ const ConnectWallet = ({ children }) => {
         setNetwork,
         setAddressesData,
         metaMaskConnection,
-        logout
+        logout,
       }}
     >
       {children}

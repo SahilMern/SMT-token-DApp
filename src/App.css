@@ -11,7 +11,7 @@
 
 . */
 
-.app-container{
+.app-container {
   display: flex;
   gap: 1rem;
 }
@@ -19,14 +19,14 @@
   width: 20%;
   height: 100vh;
   /* border: 1px solid rgb(196, 196, 196); */
-
 }
 .content {
   width: 80%;
   /* border: 1px solid rgb(196, 196, 196); */
 
   padding: 2.5rem 2rem;
-  display: flex ;
+  display: flex;
   flex-direction: column;
   gap: 2rem;
+  min-height: 100vh;
 }

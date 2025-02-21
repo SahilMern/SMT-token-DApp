@@ -1,29 +1,26 @@
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
+
+// //? Components
+// import Navbar from "./components/Navbar/Navbar"; // ✅ Fixed import
+// import Footer from "./components/Footer/Footer";
+
+//? Pages
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
-// import Navbar from "./components/Navbar/Navabr";
-import Footer from "./components/Footer/Footer";
-import Sidebar from "./components/Home/SideBar/SideBar";
-import "./App.css"; // CSS import
-import Navbar from "./components/Navbar/Navabr";
+import WalletConnect from "./pages/WalletConnect/WalletConnect";
+import Setdata from "./components/Setdata/Setdata";
 
 const App = () => {
   return (
-    <div className="app-container">
-      <div className="sidebar">
-      <Sidebar />
-      </div>
-      <div className="content">
-        <Navbar />
-        <Routes>
-          <Route element={<Home />} path="/" />
-          <Route element={<About />} path="/about" />
-        </Routes>
-        <Footer />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />}>
+        <Route path="about" element={<About />} />
+        <Route path="setdata" element={<Setdata />} />
+      </Route>
+      <Route path="/walletconnect" element={<WalletConnect />} />
+    </Routes>
   );
 };
 
 export default App;
-

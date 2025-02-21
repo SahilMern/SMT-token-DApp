@@ -62,3 +62,8 @@
     background-color: #f9fafb;
   } */
   
+.extraDiv{
+  /* border: 1px solid yellow; */
+  min-height: 70vh;
+}
+  

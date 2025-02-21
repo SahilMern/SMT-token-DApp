@@ -1,18 +1,11 @@
-import { useContext } from "react";
 import styles from "./Content.module.css";
-import { WalletContext } from "../../../context/Wallet";
 import DetailsBox from "../../DetailsBox/DetailsBox";
-
 const Content = () => {
-  const username = useContext(WalletContext); // ✅ Now it works!
-  console.log(username, "username");
-
   return (
     <div className={styles.content}>
-  
-  <div className="detailsBox">
-   <DetailsBox />
-  </div>
+      <div className="detailsBox">
+        <DetailsBox />
+      </div>
 
       <div className={styles.tableContainer}>
         <table className={styles.table}>

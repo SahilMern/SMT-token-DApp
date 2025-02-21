@@ -1,12 +1,7 @@
 import ConnectWallet from "./ConnectWallet";
-import Wallet from "./Wallet";
 
 const ContextProvider = ({ children }) => {
-  return (
-    <Wallet>
-      <ConnectWallet>{children}</ConnectWallet>
-    </Wallet>
-  );
+  return <ConnectWallet>{children}</ConnectWallet>;
 };
 
 export default ContextProvider;
