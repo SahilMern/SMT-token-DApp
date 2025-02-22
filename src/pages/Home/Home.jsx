@@ -24,10 +24,10 @@ const Home = () => {
       </div>
       <div className="content">
         <Navbar />
-        {/* <div className="extraDiv">
+        <div className="extraDiv">
           <Outlet />
         </div>
-        <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

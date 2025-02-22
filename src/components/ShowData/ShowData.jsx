@@ -39,6 +39,9 @@ const ShowData = () => {
     fetchAddresses();
   }, []);
 
+  //Short Address
+  const shortAddress = (address) =>
+    address ? `${address.slice(0, 15)}...${address.slice(-4)}` : "";
   return (
     <div className={styles.container}>
       <DetailsBox />
@@ -60,7 +63,7 @@ const ShowData = () => {
             addressesData.map((element) => (
               <tr key={element.index}>
                 <td>{element.index}</td>
-                <td>{element.address}</td>
+                <td>{shortAddress(element.address)}</td>
                 <td>{element.balance}</td>
               </tr>
             ))

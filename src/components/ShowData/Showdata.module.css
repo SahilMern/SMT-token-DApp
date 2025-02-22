@@ -1,67 +1,124 @@
 .container {
-    width: 100%;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-  }
-  .tableContent{
-    margin: 30px 0px ;
-  }
-  h2 {
-    margin-bottom: 20px;
-    font-size: 2.1rem;
-    font-weight: bold;
+  width: 100%;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+}
 
-    background: -webkit-linear-gradient(#eee, #6ab5f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.tableContent {
+  margin: 30px 0px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 2.1rem;
+  font-weight: bold;
+  background: -webkit-linear-gradient(#eee, #6ab5f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+}
+
+.table th {
+  background-color: #2c2c4e;
+  font-weight: bold;
+  color: white;
+}
+
+.table tbody tr:hover {
+  background-color: #3a3a5e;
+}
+
+.address {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #bbb;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.8rem;
   }
-  
-  .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    overflow-x: auto;
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    /* background-color: #222; */
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
+
   .table th,
   .table td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid #444;
+    padding: 10px;
+    font-size: 0.9rem;
   }
-  
-  .table th {
-    background-color: #2c2c4e;
-    font-weight: bold;
-    color: white;
+
+  .table {
+    width: 100%;
   }
-  
-  .table tbody tr:hover {
-    background-color: #3a3a5e;
-  }
-  
+
   .address {
-    max-width: 250px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 180px;
   }
-  
-  .loading {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #bbb;
+
+  .table-container {
+    overflow-x: auto;
   }
+}
+
+@media (max-width: 480px) {
+  .table th,
+  .table td {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .tableContent {
+    margin: 20px 0px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .address {
+    max-width: 150px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+}
+
+/* @media (max-width: 350px) {
+  .table th,
+  .table td {
+   
+  }
+
+} */

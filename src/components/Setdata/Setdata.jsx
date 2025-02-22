@@ -7,6 +7,9 @@ import { Abi } from "../../helper/Abi";
 import { ethers } from "ethers";
 
 const ChangeOwnerCard = () => {
+
+  const shortAddress = (address) =>
+    address ? `${address.slice(0, 10)}...${address.slice(-4)}` : "";
   const [accountAddress, setAccountAddress] = useState(""); // Track account address input
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null); // Track selected address index
@@ -236,7 +239,7 @@ const ChangeOwnerCard = () => {
             {addressesData.length > 0 ? (
               addressesData.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.address}</td>
+                  <td>{shortAddress(item.address)}</td>
                   <td>{item.index}</td>
                   <td>{item.balance}</td>
                   <td>

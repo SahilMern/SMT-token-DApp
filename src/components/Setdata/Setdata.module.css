@@ -6,9 +6,8 @@
 
 .cardBoxs {
   display: flex;
-  /* justify-content: space-between; */
   gap: 1.5rem;
-  flex-wrap: wrap; /* Make it responsive on smaller screens */
+  flex-wrap: wrap; 
   padding: 0 10px;
 }
 
@@ -18,7 +17,7 @@
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 25%;
+  width: 30%;
   min-width: 250px;
   margin-bottom: 20px;
   display: flex;
@@ -43,7 +42,6 @@
 }
 
 .card button {
-  /* background: #e42d66; */
   background: linear-gradient(272deg, #ff512f, #dd2476);
   color: white;
   border: none;
@@ -135,7 +133,6 @@ button:hover .copyIcon {
 /* Table Styles */
 .tableContainer {
   margin-top: 2rem;
-  /* background-color: #2c2c4e; */
   padding: 20px;
   border-radius: 8px;
 }
@@ -150,7 +147,7 @@ button:hover .copyIcon {
 .table td {
   padding: 12px;
   text-align: left;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 
 .table th {
@@ -185,32 +182,30 @@ button:hover .copyIcon {
   }
 
   .card {
-    width: 100%;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
-  .table {
-    font-size: 0.9rem;
+    width: 80%;
   }
 
   .modalContent {
     width: 90%;
   }
+
+  .table {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
   .card {
-    width: 100%;
+    width: 80%;
   }
-
+/* 
   .card span {
     font-size: 1rem;
-  }
+  } */
 
-  .table th, .table td {
+  /* .table th, .table td {
     font-size: 0.8rem;
-  }
+  } */
 }
+
+/* @media (max-width: 480px) { */
