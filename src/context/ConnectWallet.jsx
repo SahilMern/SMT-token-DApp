@@ -3,24 +3,19 @@ import { ethers } from "ethers";
 import { contractAddress } from "../helper/ContractAddres";
 import { Abi } from "../helper/Abi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Importing React Toastify
 
 export const ConnectWalletContex = createContext();
 
 const ConnectWallet = ({ children }) => {
-  const data = "hanuman ji";
+  const data = "hanuman ji"; 
 
-  const [account, setAccount] = useState(
-    localStorage.getItem("account") || null
-  );
+  const [account, setAccount] = useState(localStorage.getItem("account") || null);
   const navigate = useNavigate();
-  const [balance, setBalance] = useState(null);
-  const [network, setNetwork] = useState(null);
-  const [addressesData, setAddressesData] = useState([]);
-
+  
   const metaMaskConnection = async () => {
-    console.log(".... metamask connectect here ");
     if (!window.ethereum) {
-      alert("MetaMask is not installed. Please install it to continue.");
+      toast.error("MetaMask is not installed. Please install it to continue.");
       return;
     }
 
@@ -28,56 +23,40 @@ const ConnectWallet = ({ children }) => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const userAccount = await signer.getAddress();
-      let networkData = await provider.getNetwork();
+      const networkData = await provider.getNetwork();
 
-      try {
-        const providerForContract = new ethers.JsonRpcProvider(
-          "https://bsc-testnet-dataseed.bnbchain.org"
-        );
-        const contract = new ethers.Contract(
-          contractAddress,
-          Abi,
-          providerForContract
-        );
-        const contractOwner = await contract.owner();
-        console.log(contractOwner, "ContractOwner");
+      const providerForContract = new ethers.JsonRpcProvider("https://bsc-testnet-dataseed.bnbchain.org");
+      const contract = new ethers.Contract(contractAddress, Abi, providerForContract);
+      const contractOwner = await contract.owner();
 
-        const userValue = "0x08DCCcC7263C7E888D68a9AD1E9f9D008B0D61FD";
-        if (userValue === contractOwner) {
-          setAccount(userAccount);
+      //! Define the owner's address
+      const userValue = "0x08DCCcC7263C7E888D68a9AD1E9f9D008B0D61FD"; 
 
-          localStorage.setItem("account", userAccount);
-          localStorage.setItem("login", "true");
-          navigate("/");
-        } else {
-          alert(`${userAccount} Address Not match with Owner Adress`);
-        }
-      } catch (error) {
-        console.error("Error connecting wallet:", error);
+      if (userValue === contractOwner) {
+        setAccount(userAccount);
+        localStorage.setItem("account", userAccount);
+        localStorage.setItem("login", "true");
+        navigate("/");
+        toast.success("Connected to MetaMask successfully.");
+      } else {
+        toast.error(`${userAccount} Address does not match with Contract Owner's Address`);
       }
     } catch (error) {
       console.error("Error connecting wallet:", error);
+      toast.error("Error connecting to MetaMask.");
     }
   };
 
   const handleDisconnect = () => {
     setAccount(null);
-    setBalance(null);
-    setNetwork(null);
     localStorage.removeItem("account");
     localStorage.removeItem("login");
+    toast.info("Disconnected from MetaMask.");
     navigate("/walletconnect");
   };
 
   return (
-    <ConnectWalletContex.Provider
-      value={{
-        account,
-        metaMaskConnection,
-        handleDisconnect,
-        data,
-      }}
-    >
+    <ConnectWalletContex.Provider value={{ account, metaMaskConnection, handleDisconnect, data }}>
       {children}
     </ConnectWalletContex.Provider>
   );
