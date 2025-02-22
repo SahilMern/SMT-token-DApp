@@ -1,10 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-//? Components
-// import Navbar from "./components/Navbar/Navbar"; // ✅ Fixed import
-// import Footer from "./components/Footer/Footer";
-
 //? Pages
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";

@@ -11,10 +11,14 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>MileStone</div>
-      <div>{account ? `Wallet: ${shortAddress(account)}` : "Not Connected"}</div>
-      <button className={styles.disconnectButton} onClick={handleDisconnect}>
-        Disconnect
-      </button>
+      <div className={styles.walletInfo}>
+        {account ? `Wallet: ${shortAddress(account)}` : "Not Connected"}
+      </div>
+      {account && (
+        <button className={styles.disconnectButton} onClick={handleDisconnect}>
+          Disconnect
+        </button>
+      )}
     </nav>
   );
 };

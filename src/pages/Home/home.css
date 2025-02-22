@@ -1,11 +1,10 @@
 .container {
     padding: 16px;
-    /* background-color: #f3f4f6; */
     border-radius: 8px;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
     text-align: center;
     max-width: 400px;
     margin: auto;
+    border: 1px solid yellow;
   }
   
   h2 {
@@ -40,7 +39,6 @@
     color: white;
   }
   
-  /* Table Styling */
   .table-container {
     width: 100%;
     margin-top: 16px;
@@ -53,17 +51,21 @@
     padding: 8px;
     text-align: center;
   }
-/*   
-  .table-container th {
-    background-color: #d1d5db;
-  }
-  
-  .table-container tr:nth-child(even) {
-    background-color: #f9fafb;
-  } */
-  
+
 .extraDiv{
-  /* border: 1px solid yellow; */
   min-height: 70vh;
 }
   
+/* .content{
+  border: 1px solid red;
+} */
+
+@media (max-width: 1200px) {
+  .sidebar{
+    display: none;
+  }
+  .content{
+    width: 100%;
+  }
+
+}

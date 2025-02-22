@@ -8,35 +8,77 @@
   width: 100%;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
-/* Logo */
 .logo {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: white;
+  text-transform: uppercase;
 }
 
 .walletInfo {
   display: flex;
   align-items: center;
   gap: 15px;
+  font-size: 1rem;
 }
+
 .disconnectButton {
   border: none;
   outline: none;
   background: linear-gradient(272deg, #ff512f, #dd2476);
   color: white;
   font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
+
 .disconnectButton:hover {
   background: linear-gradient(272deg, #fa623c, #feb47b);
 }
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.5rem;
+
+@media (max-width: 1024px) {
+
+
+  .logo {
+    font-size: 1.5rem;
   }
+
+  .walletInfo {
+    font-size: 1rem;
+  }
+
+  .disconnectButton {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .walletInfo {
+    font-size: 0.9rem;
+  }
+
+  .disconnectButton {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+.navbar{
+  flex-direction: column;
+  min-height: 10rem;
+  padding: 1rem;
+}
 }

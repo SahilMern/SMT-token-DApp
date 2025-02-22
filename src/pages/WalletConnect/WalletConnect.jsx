@@ -7,7 +7,7 @@ const WalletConnect = () => {
   const { metaMaskConnection, data } = useContext(ConnectWalletContex);
   const navigate = useNavigate();
 
-  // Check if the user is logged in
+  //? Check if the user is logged in
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("login");
     if (isLoggedIn === "true") {
