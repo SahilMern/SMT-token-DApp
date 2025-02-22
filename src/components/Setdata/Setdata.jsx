@@ -7,9 +7,9 @@ import { Abi } from "../../helper/Abi";
 import { ethers } from "ethers";
 
 const ChangeOwnerCard = () => {
-
   const shortAddress = (address) =>
     address ? `${address.slice(0, 10)}...${address.slice(-4)}` : "";
+
   const [accountAddress, setAccountAddress] = useState(""); // Track account address input
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null); // Track selected address index
@@ -46,54 +46,11 @@ const ChangeOwnerCard = () => {
     fetchOwnerAndConnectedAddress();
   }, []);
 
-  // Handle change of ownership or minter
-  const handleChangeAddress = async () => {
-    if (accountAddress) {
-      if (connectedAddress !== ownerAddress) {
-        toast.error("You must be the contract owner to perform this action!");
-        return;
-      }
-
-      // Use the provider to get the signer
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-
-      // Use the signer to interact with the contract
-      const contract = new ethers.Contract(contractAddress, Abi, signer);
-
-      try {
-        setIsSubmitting(true); // Start the loader
-        let tx;
-        if (isOwnerAction) {
-          // Change ownership
-          tx = await contract.transferOwnership(accountAddress);
-        } else {
-          // Change minter
-          tx = await contract.setMinter(accountAddress);
-        }
-
-        // Wait for the transaction to be mined
-        await tx.wait();
-        toast.success(
-          `${isOwnerAction ? "Owner" : "Minter"} changed successfully!`
-        );
-        setIsModalOpen(false); // Close the modal after success
-        setIsSubmitting(false); // Stop the loader
-        refreshAddressesData(); // Refresh the data after success
-      } catch (error) {
-        toast.error("Failed to change address!");
-        console.error(error);
-        setIsSubmitting(false); // Stop the loader in case of error
-      }
-    } else {
-      toast.error("Please enter a valid account address!");
-    }
-  };
-
   // Function to open the modal and set the address action
-  const openModal = (addressIndex, address = "") => {
+  const openModal = (addressIndex, address = "", isOwner = true) => {
     setSelectedAddressIndex(addressIndex); // Store which address was clicked
     setAccountAddress(""); // Reset the address input to empty when modal opens
+    setIsOwnerAction(isOwner); // Set the correct action type (owner or minter)
     setIsModalOpen(true); // Open the modal
   };
 
@@ -116,35 +73,40 @@ const ChangeOwnerCard = () => {
     try {
       setIsSubmitting(true); // Start the loader
       let tx;
-      console.log("hey i aaa caal", selectedAddressIndex);
-      // return true
-      
-      // Call the correct function depending on the address index
-      switch (selectedAddressIndex) {
-        case 1:
-          tx = await contract.setAddress1(accountAddress);
-          break;
-        case 2:
-          tx = await contract.setAddress2(accountAddress);
-          break;
-        case 3:
-          tx = await contract.setAddress3(accountAddress);
-          break;
-        case 4:
-          tx = await contract.setAddress4(accountAddress);
-          break;
-        case 5:
-          tx = await contract.setAddress5(accountAddress);
-          break;
-        default:
-          toast.error("Invalid address index!");
-          setIsSubmitting(false); // Stop the loader
-          return;
+
+      if (isOwnerAction) {
+        // Owner action: Change owner function
+        switch (selectedAddressIndex) {
+          case 1:
+            tx = await contract.setAddress1(accountAddress);
+            break;
+          case 2:
+            tx = await contract.setAddress2(accountAddress);
+            break;
+          case 3:
+            tx = await contract.setAddress3(accountAddress);
+            break;
+          case 4:
+            tx = await contract.setAddress4(accountAddress);
+            break;
+          case 5:
+            tx = await contract.setAddress5(accountAddress);
+            break;
+          default:
+            toast.error("Invalid address index!");
+            setIsSubmitting(false); // Stop the loader
+            return;
+        }
+      } else {
+        // Minter action: Change minter function
+        tx = await contract.setMinter(accountAddress);
       }
 
       // Wait for the transaction to be mined
       await tx.wait();
-      toast.success(`Address ${selectedAddressIndex} changed successfully!`);
+      toast.success(
+        `${isOwnerAction ? "Address" : "Minter"} changed successfully!`
+      );
       setIsModalOpen(false); // Close the modal after success
       setIsSubmitting(false); // Stop the loader
       refreshAddressesData(); // Refresh the data after success
@@ -192,11 +154,11 @@ const ChangeOwnerCard = () => {
       <div className={Style.cardBoxs}>
         <div className={Style.card}>
           <span>Change Ownership</span>
-          <button onClick={() => openModal(0)}>Change Owner</button>
+          <button onClick={() => openModal(0, "", true)}>Change Owner</button>
         </div>
         <div className={Style.card}>
           <span>Change Minter Address</span>
-          <button onClick={() => openModal(0)}>Change Minter</button>
+          <button onClick={() => openModal(0, "", false)}>Change Minter</button>
         </div>
       </div>
 
@@ -243,7 +205,7 @@ const ChangeOwnerCard = () => {
                   <td>{item.index}</td>
                   <td>{item.balance}</td>
                   <td>
-                    <button onClick={() => openModal(item.index, item.address)}>
+                    <button onClick={() => openModal(item.index, item.address, true)}>
                       Change Address {item.index}
                     </button>
                   </td>
