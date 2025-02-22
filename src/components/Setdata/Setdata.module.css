@@ -1,68 +1,53 @@
+/* Existing Styles for Container and Cards */
 .container {
   margin-top: 3rem;
-  width: 100%;
-  /* padding: 20px;  Added padding for spacing */
-  /* background-color: #1e1e2f; */
-  border-radius: 10px;
-  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
   color: white;
 }
 
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
-
-.detailsCard {
+.cardBoxs {
   display: flex;
-  justify-content: space-between;
-  gap: 2px;
-  flex-wrap: wrap; /* Makes it responsive */
+  /* justify-content: space-between; */
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Make it responsive on smaller screens */
+  padding: 0 10px;
 }
 
 .card {
-  background: #2c2c4e;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  background: #2c2c4e7b;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 30%; 
-  min-width: 200px;
-  margin-bottom: 20px; 
+  width: 25%;
+  min-width: 250px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 1px solid rebeccapurple; */
-  min-height: 5rem;
+  min-height: 8rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card span {
   font-weight: bold;
-  /* color: #c5c5c5; */
-      background: -webkit-linear-gradient(#eee, #333);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
 }
 
-.card p {
-  font-size: 14px;
-  color: #fff;
-  word-wrap: break-word;
-}
-
-.copydiv{
-  display: flex;
-  gap: 0.5rem;
-}
-
-
-button {
-  background: #ffcc00;
-  color: black;
+.card button {
+  /* background: #e42d66; */
+  background: linear-gradient(272deg, #ff512f, #dd2476);
+  color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
@@ -70,29 +55,162 @@ button {
   gap: 5px;
   margin-top: 10px;
   transition: 0.3s ease-in-out;
+  font-size: 1rem;
 }
 
-button:hover {
-  background: #ffd700;
+.card button:hover {
+  background: #fd6363;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 .copyIcon {
   font-size: 14px;
-  transition: transform 0.2s ease-in-out;  /* Added icon transition for hover */
+  transition: transform 0.2s ease-in-out;
 }
 
 button:hover .copyIcon {
-  transform: rotate(20deg);  /* Slight rotation effect on icon */
+  transform: rotate(20deg);
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #2c2c4e;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+}
+
+.modalContent h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.modalContent input {
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #3b3b5e;
+  color: white;
+}
+
+.modalActions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modalActions button {
+  padding: 10px 20px;
+  background: #e42d66;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.modalActions button:hover {
+  background: #fd6363;
+}
+
+/* Table Styles */
+.tableContainer {
+  margin-top: 2rem;
+  /* background-color: #2c2c4e; */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #3b3b5e;
+  color: white;
+}
+
+.table td {
+  background-color: #3b3b5e1e;
+  color: white;
+}
+
+.table td button {
+  background-color: #e42d66;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.table td button:hover {
+  background-color: #fd6363;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .detailsCard {
+  .cardBoxs {
     flex-direction: column;
     align-items: center;
   }
 
   .card {
-    width: 90%; /* Makes it full width on smaller screens */
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .table {
+    font-size: 0.9rem;
+  }
+
+  .modalContent {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
+
+  .card span {
+    font-size: 1rem;
+  }
+
+  .table th, .table td {
+    font-size: 0.8rem;
   }
 }

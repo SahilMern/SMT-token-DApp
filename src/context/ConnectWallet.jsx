@@ -42,9 +42,8 @@ const ConnectWallet = ({ children }) => {
         const contractOwner = await contract.owner();
         console.log(contractOwner, "ContractOwner");
 
-        const userValue = "0x07167acA51498BA070858E0a91fcafB26Bc32ce4";
+        const userValue = "0x08DCCcC7263C7E888D68a9AD1E9f9D008B0D61FD";
         if (userValue === contractOwner) {
-          alert("done");
           setAccount(userAccount);
 
           localStorage.setItem("account", userAccount);
