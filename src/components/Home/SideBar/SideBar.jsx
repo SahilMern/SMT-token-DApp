@@ -1,6 +1,6 @@
 import styles from "./Sidebar.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
 //ICONS
 import {
   FaExchangeAlt,
@@ -29,11 +29,11 @@ const Sidebar = () => {
               <MdDashboard className={styles.icon} /> Dashboard
             </li>
           </NavLink>
-          <NavLink to={"/about"} className="Navlink">
+          {/* <NavLink to={"/about"} className="Navlink">
             <li className={location.pathname === "/about" ? styles.active : ""}>
               <FaUsers className={styles.icon} /> Users
             </li>
-          </NavLink>
+          </NavLink> */}
 
           <NavLink to={"/setdata"} className="Navlink">
             <li
@@ -42,17 +42,19 @@ const Sidebar = () => {
               <FaExchangeAlt className={styles.icon} />Set Data
             </li>
           </NavLink>
-          <li>
+          
+          <li onClick={() => toast("No page! Its only for design purpose")}>
             <FaShoppingCart className={styles.icon} /> Buy
           </li>
-          <li>
+          <li onClick={() => toast("No page! Its only for design purpose")}>
             <FaGift className={styles.icon} /> Airdrop
           </li>
-          <li>
+          <li onClick={() => toast("No page! Its only for design purpose")}>
             <FaUserCircle className={styles.icon} /> My Profile
           </li>
         </ul>
       </div>
+      <ToastContainer />
     </div>
   );
 };

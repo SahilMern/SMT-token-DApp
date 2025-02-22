@@ -42,25 +42,34 @@ const DetailsBox = () => {
     contractConnection();
   }, []);
 
+  const shortAddress = (address) =>
+    address ? `${address.slice(0, 18)}...${address.slice(-4)}` : "";
   return (
     <div className={Style.container}>
-      <h2>Contract Details</h2>
+      {/* <h2>Contract Details</h2> */}
 
       <div className={Style.detailsCard}>
         <div className={Style.card}>
           <span>Owner Address</span>
-          <p>{contractOwner}</p>
-          <button onClick={() => copyToClipboard(contractOwner)}>
-            <FaCopy className={Style.copyIcon} /> Copy
-          </button>
+
+          <div className={Style.copydiv}>
+            <p>{shortAddress(contractOwner)}</p>
+            <FaCopy
+              className={Style.copyIcon}
+              onClick={() => copyToClipboard(contractOwner)}
+            />
+          </div>
         </div>
 
         <div className={Style.card}>
           <span>Minter Address</span>
-          <p>{minterAddress}</p>
-          <button onClick={() => copyToClipboard(minterAddress)}>
-            <FaCopy className={Style.copyIcon} /> Copy
-          </button>
+          <div className={Style.copydiv}>
+            <p>{shortAddress(minterAddress)}</p>
+            <FaCopy
+              className={Style.copyIcon}
+              onClick={() => copyToClipboard(minterAddress)}
+            />
+          </div>
         </div>
 
         <div className={Style.card}>

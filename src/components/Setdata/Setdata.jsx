@@ -1,81 +1,61 @@
-import { useEffect, useState } from "react";
-import styles from "./Setdata.module.css";
-import { contractAddress } from "../../helper/ContractAddres";
-import { Abi } from "../../helper/Abi";
-import { ethers } from "ethers";
-import DetailsBox from "../DetailsBox/DetailsBox";
+import React, { useEffect, useState } from 'react'
+import { contractAddress } from '../../helper/ContractAddres';
+import { Abi } from '../../helper/Abi';
+import { ethers } from 'ethers';
+import Style from "./Setdata.module.css"
+import { FaCopy } from "react-icons/fa";
 
 const Setdata = () => {
-  const [addressesData, setAddressesData] = useState([]);
+    const [contractOwner, setContractOwner] = useState("");
+    const [minterAddress, setMinterAddress] = useState("");
+    const [totalSupply, setTotalSupply] = useState("");
 
-  useEffect(() => {
-    const fetchAddresses = async () => {
-      const provider = new ethers.JsonRpcProvider(
-        "https://bsc-testnet-dataseed.bnbchain.org"
-      );
-      const contract = new ethers.Contract(contractAddress, Abi, provider);
-
-      try {
-        let data = [];
-
-        for (let i = 1; i <= 5; i++) {
-          const addressKey = `address${i}`;
-          if (contract[addressKey]) {
-            const address = await contract[addressKey]();
-            const balance = await contract.balanceOf(address);
-            data.push({
-              index: i,
-              address,
-              balance: ethers.formatEther(balance),
-            });
-          }
+    useEffect(() => {
+      const contractConnection = async () => {
+        try {
+          const providerForContract = new ethers.JsonRpcProvider(
+            "https://bsc-testnet-dataseed.bnbchain.org"
+          );
+          const contract = new ethers.Contract(
+            contractAddress,
+            Abi,
+            providerForContract
+          );
+  
+          const owner = await contract.owner();
+          const minter = await contract.minter();
+          const supply = await contract.totalSupply();
+  
+          setContractOwner(owner);
+          setMinterAddress(minter);
+          setTotalSupply(ethers.formatEther(supply)); 
+        } catch (error) {
+          console.error("Error fetching contract details:", error);
         }
-
-        setAddressesData(data);
-      } catch (error) {
-        console.error("Error fetching contract data:", error);
-      }
-    };
-
-    fetchAddresses();
-  }, []);
-
+      };
+  
+      contractConnection();
+    }, []);
   return (
-    <div className={styles.container}>
-      <DetailsBox />
-      <div>
-
-      <h2>Contract Addresses & Balances</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Address</th>
-            <th>Balance (BNB)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {addressesData.length > 0 ? (
-            addressesData.map((element) => (
-              <tr key={element.index}>
-                <td>{element.index}</td>
-                <td>{element.address}</td>
-                <td>{element.balance}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3" className={styles.loading}>
-                Loading data...
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-      </div>
-
+    <div className={Style.container}>
+      {/* set Admin change ownership and other box */}
+         <div className={Style.detailsCard}>
+              <div className={Style.card}>
+                <span>Change owner Ship</span>
+              </div>
+      
+              <div className={Style.card}>
+                <span>Minter Address</span>
+             
+              </div>
+      
+              <div className={Style.card}>
+                <span>Total Supply</span>
+                <p>{totalSupply} Tokens</p>
+              </div>
+            </div>
     </div>
-  );
-};
+  )
+}
 
-export default Setdata;
+export default Setdata
