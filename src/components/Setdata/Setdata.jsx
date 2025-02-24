@@ -47,14 +47,14 @@ const ChangeOwnerCard = () => {
   }, []);
 
   // Function to open the modal and set the address action
-  const openModal = (addressIndex, address = "", isOwner = true) => {
+  const openModal = (addressIndex, isOwner = true) => {
     setSelectedAddressIndex(addressIndex); // Store which address was clicked
     setAccountAddress(""); // Reset the address input to empty when modal opens
     setIsOwnerAction(isOwner); // Set the correct action type (owner or minter)
     setIsModalOpen(true); // Open the modal
   };
 
-  // Handle specific address updates (setAddress1 through setAddress5)
+  // Handle specific address updates (setAddress1 through setAddress5) or transfer ownership
   const handleSetAddress = async () => {
     if (!accountAddress) {
       toast.error("Please enter a valid account address!");
@@ -74,8 +74,11 @@ const ChangeOwnerCard = () => {
       setIsSubmitting(true); // Start the loader
       let tx;
 
-      if (isOwnerAction) {
-        // Owner action: Change owner function
+      if (isOwnerAction && selectedAddressIndex === 0) {
+        // Transfer ownership
+        tx = await contract.transferOwnership(accountAddress);
+      } else if (isOwnerAction) {
+        // Owner action: Change address function
         switch (selectedAddressIndex) {
           case 1:
             tx = await contract.setAddress1(accountAddress);
@@ -105,7 +108,13 @@ const ChangeOwnerCard = () => {
       // Wait for the transaction to be mined
       await tx.wait();
       toast.success(
-        `${isOwnerAction ? "Address" : "Minter"} changed successfully!`
+        `${
+          isOwnerAction && selectedAddressIndex === 0
+            ? "Ownership"
+            : isOwnerAction
+            ? "Address"
+            : "Minter"
+        } changed successfully!`
       );
       setIsModalOpen(false); // Close the modal after success
       setIsSubmitting(false); // Stop the loader
@@ -154,11 +163,11 @@ const ChangeOwnerCard = () => {
       <div className={Style.cardBoxs}>
         <div className={Style.card}>
           <span>Change Ownership</span>
-          <button onClick={() => openModal(0, "", true)}>Change Owner</button>
+          <button onClick={() => openModal(0, true)}>Change Owner</button>
         </div>
         <div className={Style.card}>
           <span>Change Minter Address</span>
-          <button onClick={() => openModal(0, "", false)}>Change Minter</button>
+          <button onClick={() => openModal(0, false)}>Change Minter</button>
         </div>
       </div>
 
@@ -205,7 +214,7 @@ const ChangeOwnerCard = () => {
                   <td>{item.index}</td>
                   <td>{item.balance}</td>
                   <td>
-                    <button onClick={() => openModal(item.index, item.address, true)}>
+                    <button onClick={() => openModal(item.index, true)}>
                       Change Address {item.index}
                     </button>
                   </td>
