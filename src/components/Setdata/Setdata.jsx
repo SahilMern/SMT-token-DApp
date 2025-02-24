@@ -19,6 +19,14 @@ const Setdata = () => {
   const [isOwnerAction, setIsOwnerAction] = useState(true); 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const nameMappings = [
+    "Community Development",
+    "Developer Fund",
+    "Sid Fund",
+    "Development and Marketing",
+    "Administration, Legal & Marketing",
+  ];
+
   useEffect(() => {
     const fetchOwnerAndConnectedAddress = async () => {
       const provider = new ethers.JsonRpcProvider(
@@ -49,7 +57,6 @@ const Setdata = () => {
     setIsOwnerAction(isOwner); 
     setIsModalOpen(true); 
   };
-
 
   const handleSetAddress = async () => {
     if (!accountAddress) {
@@ -137,6 +144,7 @@ const Setdata = () => {
           const balance = await contract.balanceOf(address);
           data.push({
             index: i,
+            name: nameMappings[i - 1],  // Assign name based on index
             address,
             balance: ethers.formatEther(balance),
           });
@@ -191,12 +199,13 @@ const Setdata = () => {
         </div>
       )}
 
-      {/* Table displaying address, ID, and amount */}
+      {/* Table displaying address, Name, Id, and amount */}
       <div className={Style.tableContainer}>
         <h3>Address Table</h3>
         <table className={Style.table}>
           <thead>
             <tr>
+              <th>Name</th>
               <th>Address</th>
               <th>Id</th>
               <th>Balance (BNB)</th>
@@ -207,6 +216,7 @@ const Setdata = () => {
             {addressesData.length > 0 ? (
               addressesData.map((item, index) => (
                 <tr key={index}>
+                  <td>{item.name}</td> {/* Display Name here */}
                   <td>{shortAddress(item.address)}</td>
                   <td>{item.index}</td>
                   <td>{item.balance}</td>
@@ -219,7 +229,7 @@ const Setdata = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="4" className={Style.loading}>
+                <td colSpan="5" className={Style.loading}>
                   Loading data...
                 </td>
               </tr>

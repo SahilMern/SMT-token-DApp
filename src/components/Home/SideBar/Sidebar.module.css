@@ -14,12 +14,18 @@
 }
 
 .logo {
-  width: 12rem;
-  height: auto;
-  margin-bottom: 50px;
+  width: 6rem;
+  /* height: auto; */
+  /* margin-bottom: 50px; */
   transition: transform 0.3s ease-in-out;
 }
 
+.logoandtext h3{
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a2a7ad;
+  margin-bottom: 3rem;
+}
 .logo:hover {
   transform: scale(1.1);
 }

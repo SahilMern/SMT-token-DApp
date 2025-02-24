@@ -18,11 +18,10 @@ const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sideBarContainer}>
-        <img
-          src="https://token.decentrawood.com/static/media/Logo.1d10f686.png"
-          alt="Logo"
-          className={styles.logo}
-        />
+        <div className={styles.logoandtext}>
+          <img src="./star_milestone.png" alt="Logo" className={styles.logo} />
+          <h3>Star MileStone</h3>
+        </div>
         <ul>
           <NavLink to={"/"} className="Navlink">
             <li className={location.pathname === "/" ? styles.active : ""}>

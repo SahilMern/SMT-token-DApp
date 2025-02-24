@@ -4,8 +4,18 @@ import { Abi } from "../../helper/Abi";
 import { ethers } from "ethers";
 import DetailsBox from "../DetailsBox/DetailsBox";
 import styles from "./Showdata.module.css";
+
 const ShowData = () => {
   const [addressesData, setAddressesData] = useState([]);
+
+  // Define the mapping of names to the contract addresses
+  const nameMappings = [
+    "Community Development",
+    "Developer Fund",
+    "Sid Fund",
+    "Development and Marketing",
+    "Administration, Legal & Marketing",
+  ];
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -24,6 +34,7 @@ const ShowData = () => {
             const balance = await contract.balanceOf(address);
             data.push({
               index: i,
+              name: nameMappings[i - 1],  // Map name based on the index
               address,
               balance: ethers.formatEther(balance),
             });
@@ -39,9 +50,10 @@ const ShowData = () => {
     fetchAddresses();
   }, []);
 
-  //Short Address
+  // Shorten the address
   const shortAddress = (address) =>
     address ? `${address.slice(0, 15)}...${address.slice(-4)}` : "";
+
   return (
     <div className={styles.container}>
       <DetailsBox />
@@ -52,6 +64,7 @@ const ShowData = () => {
             <thead>
               <tr>
                 <th>Id</th>
+                <th>Name</th> {/* Added Name Column */}
                 <th>Address</th>
                 <th>Balance (BNB)</th>
               </tr>
@@ -61,13 +74,14 @@ const ShowData = () => {
                 addressesData.map((element) => (
                   <tr key={element.index}>
                     <td>{element.index}</td>
+                    <td>{element.name}</td> {/* Display Name */}
                     <td>{shortAddress(element.address)}</td>
                     <td>{element.balance}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="3" className={styles.loading}>
+                  <td colSpan="4" className={styles.loading}>
                     Loading data...
                   </td>
                 </tr>
