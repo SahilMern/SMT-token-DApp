@@ -1,4 +1,3 @@
-/* Existing Styles for Container and Cards */
 .container {
   margin-top: 3rem;
   color: white;
@@ -54,6 +53,7 @@
   margin-top: 10px;
   transition: 0.3s ease-in-out;
   font-size: 1rem;
+
 }
 
 .card button:hover {
@@ -164,14 +164,15 @@ button:hover .copyIcon {
   background-color: #e42d66;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 15px 10px;  
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
+
 }
 
 .table td button:hover {
-  background-color: #fd6363;
+  background-color: #b71b4d;
 }
 
 /* Responsive Design */
@@ -207,5 +208,3 @@ button:hover .copyIcon {
     font-size: 0.8rem;
   } */
 }
-
-/* @media (max-width: 480px) { */

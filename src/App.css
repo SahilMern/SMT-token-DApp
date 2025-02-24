@@ -1,29 +1,15 @@
-/* .app-container {
-  display: flex;
-  min-height: 100vh;
-} */
-
-/* .sidebar {
-  width: 30%;
-  background-color: #181f3c; 
-  height: 100vh;
-}
-
-. */
-
 .app-container {
   display: flex;
   gap: 1rem;
 }
 .sidebar {
+  /* border: 1px solid rgb(196, 196, 196); */
   width: 20%;
   height: 100vh;
-  /* border: 1px solid rgb(196, 196, 196); */
 }
 .content {
-  width: 80%;
   /* border: 1px solid rgb(196, 196, 196); */
-
+  width: 80%;
   padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { contractAddress } from '../../helper/ContractAddres';
-import { Abi } from '../../helper/Abi';
-import { ethers } from 'ethers';
-import DetailsBox from '../DetailsBox/DetailsBox';
-import styles from "./Showdata.module.css"
+import React, { useEffect, useState } from "react";
+import { contractAddress } from "../../helper/ContractAddres";
+import { Abi } from "../../helper/Abi";
+import { ethers } from "ethers";
+import DetailsBox from "../DetailsBox/DetailsBox";
+import styles from "./Showdata.module.css";
 const ShowData = () => {
   const [addressesData, setAddressesData] = useState([]);
 
@@ -46,41 +46,38 @@ const ShowData = () => {
     <div className={styles.container}>
       <DetailsBox />
       <div>
-
-<div className={styles.tableContent}>
-
-      <h2>Contract Addresses & Balances</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Address</th>
-            <th>Balance (BNB)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {addressesData.length > 0 ? (
-            addressesData.map((element) => (
-              <tr key={element.index}>
-                <td>{element.index}</td>
-                <td>{shortAddress(element.address)}</td>
-                <td>{element.balance}</td>
+        <div className={styles.tableContent}>
+          <h2>Contract Addresses & Balances</h2>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Address</th>
+                <th>Balance (BNB)</th>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3" className={styles.loading}>
-                Loading data...
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {addressesData.length > 0 ? (
+                addressesData.map((element) => (
+                  <tr key={element.index}>
+                    <td>{element.index}</td>
+                    <td>{shortAddress(element.address)}</td>
+                    <td>{element.balance}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className={styles.loading}>
+                    Loading data...
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-      </div>
-
     </div>
   );
-}
+};
 
-export default ShowData
+export default ShowData;

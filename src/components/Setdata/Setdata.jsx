@@ -10,16 +10,15 @@ const Setdata = () => {
   const shortAddress = (address) =>
     address ? `${address.slice(0, 10)}...${address.slice(-4)}` : "";
 
-  const [accountAddress, setAccountAddress] = useState(""); // Track account address input
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
-  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null); // Track selected address index
-  const [ownerAddress, setOwnerAddress] = useState(""); // Store the contract owner address
-  const [connectedAddress, setConnectedAddress] = useState(""); // Store the connected wallet address
-  const [addressesData, setAddressesData] = useState([]); // Store fetched addresses data
-  const [isOwnerAction, setIsOwnerAction] = useState(true); // Toggle between owner and minter action
-  const [isSubmitting, setIsSubmitting] = useState(false); // Track if a transaction is in progress
+  const [accountAddress, setAccountAddress] = useState(""); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null); 
+  const [ownerAddress, setOwnerAddress] = useState(""); 
+  const [connectedAddress, setConnectedAddress] = useState(""); 
+  const [addressesData, setAddressesData] = useState([]); 
+  const [isOwnerAction, setIsOwnerAction] = useState(true); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Fetch contract owner and connected wallet address when the component mounts
   useEffect(() => {
     const fetchOwnerAndConnectedAddress = async () => {
       const provider = new ethers.JsonRpcProvider(
@@ -28,10 +27,8 @@ const Setdata = () => {
       const contract = new ethers.Contract(contractAddress, Abi, provider);
 
       try {
-        // Get the contract owner address
         const owner = await contract.owner();
         setOwnerAddress(owner);
-        // Get the connected wallet address
         if (window.ethereum) {
           const provider = new ethers.BrowserProvider(window.ethereum);
           const signer = await provider.getSigner();
@@ -46,15 +43,14 @@ const Setdata = () => {
     fetchOwnerAndConnectedAddress();
   }, []);
 
-  // Function to open the modal and set the address action
   const openModal = (addressIndex, isOwner = true) => {
-    setSelectedAddressIndex(addressIndex); // Store which address was clicked
-    setAccountAddress(""); // Reset the address input to empty when modal opens
-    setIsOwnerAction(isOwner); // Set the correct action type (owner or minter)
-    setIsModalOpen(true); // Open the modal
+    setSelectedAddressIndex(addressIndex); 
+    setAccountAddress(""); 
+    setIsOwnerAction(isOwner); 
+    setIsModalOpen(true); 
   };
 
-  // Handle specific address updates (setAddress1 through setAddress5) or transfer ownership
+
   const handleSetAddress = async () => {
     if (!accountAddress) {
       toast.error("Please enter a valid account address!");
@@ -71,14 +67,12 @@ const Setdata = () => {
     const contract = new ethers.Contract(contractAddress, Abi, signer);
 
     try {
-      setIsSubmitting(true); // Start the loader
+      setIsSubmitting(true); 
       let tx;
 
       if (isOwnerAction && selectedAddressIndex === 0) {
-        // Transfer ownership
         tx = await contract.transferOwnership(accountAddress);
       } else if (isOwnerAction) {
-        // Owner action: Change address function
         switch (selectedAddressIndex) {
           case 1:
             tx = await contract.setAddress1(accountAddress);

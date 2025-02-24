@@ -1,6 +1,6 @@
 import styles from "./Sidebar.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 //ICONS
 import {
   FaExchangeAlt,
@@ -39,10 +39,11 @@ const Sidebar = () => {
             <li
               className={location.pathname === "/setdata" ? styles.active : ""}
             >
-              <FaExchangeAlt className={styles.icon} />Set Data
+              <FaExchangeAlt className={styles.icon} />
+              Set Data
             </li>
           </NavLink>
-          
+
           <li onClick={() => toast("No page! Its only for design purpose")}>
             <FaShoppingCart className={styles.icon} /> Buy
           </li>
