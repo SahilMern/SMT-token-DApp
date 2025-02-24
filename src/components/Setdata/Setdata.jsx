@@ -6,7 +6,7 @@ import { contractAddress } from "../../helper/ContractAddres";
 import { Abi } from "../../helper/Abi";
 import { ethers } from "ethers";
 
-const ChangeOwnerCard = () => {
+const Setdata = () => {
   const shortAddress = (address) =>
     address ? `${address.slice(0, 10)}...${address.slice(-4)}` : "";
 
@@ -186,7 +186,10 @@ const ChangeOwnerCard = () => {
               <button onClick={handleSetAddress} disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>
-              <button onClick={() => setIsModalOpen(false)} disabled={isSubmitting}>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                disabled={isSubmitting}
+              >
                 Cancel
               </button>
             </div>
@@ -236,4 +239,4 @@ const ChangeOwnerCard = () => {
   );
 };
 
-export default ChangeOwnerCard;
+export default Setdata;
